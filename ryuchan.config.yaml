@@ -1,7 +1,7 @@
 # 网站的基本信息
 site:
-  tab: RyuChan # 浏览器标签栏上显示的文本
-  title: RyuChan # 网站的标题
+  tab: BaiYu # 浏览器标签栏上显示的文本
+  title: BaiYu # 网站的标题
   description: 🌸 轻盈、优雅、纯净 —— 用文字与图片记录生活与创意 # 网站的描述，用于SEO等
   language: zh  # 网站的语言，例如 "en" 是英文
   favicon: /favicon.ico # 网站的图标，用于浏览器标签栏和其他地方显示
@@ -26,7 +26,7 @@ site:
   # Banner 页面标题配置
   pages:
     home:  
-      title: "RyuChan's Blog"  
+      title: "BaiYu's Blog"  
       subtitle: "欲买桂花同载酒，终不似，少年游！"   
       typewriterTexts: # 新增打字机文本配置  
         - "🌸 欲买桂花同载酒，终不似，少年游！"  
@@ -124,8 +124,8 @@ site:
 
 # 用户的个人信息
 user:
-  name: RyuChan # 用户名
-  site: "https://hub.xiaozhangya.xin" # 用户的网站链接
+  name: BaiYu # 用户名
+  site: "https://7rain.top" # 用户的网站链接
   avatar: /profile.png # 用户头像路径
   sidebar: # 侧边栏配置
     social:
@@ -133,26 +133,18 @@ user:
       #   ariaLabel: Support my work # 图标的可访问性标签
       #   title: Support my work # 图标的悬浮标题
       #   svg: "ri:cup-line"
-      - href: "https://github.com/xz131714"
+      - href: "https://github.com/7rain"
         ariaLabel: Github
         title: Github
         svg: "ri:github-line"
-      - href: "https://space.bilibili.com/1536411565"
+      - href: "https://space.bilibili.com/1246438445"
         ariaLabel: BiliBili
         title: BiliBili
         svg: "ri:bilibili-line"
-      - href: "https://x.com/xzz_ya"
-        ariaLabel: X(twitter)
-        title: X(twitter)
-        svg: "ri:twitter-line"
       # - href: "https://t.me/xzz_ya"
       #   ariaLabel: Telegram
       #   title: Telegram
       #   svg: "ri:telegram-line"
-      - href: "https://app.folo.is/share/feeds/172229198194932736"  
-        ariaLabel: Subscribe via Folo  
-        title: Folo  
-        svg: "ri:rss-fill"
 
   footer:
     social:
@@ -160,35 +152,28 @@ user:
       #   ariaLabel: Support my work # 图标的可访问性标签
       #   title: Support my work # 图标的悬浮标题
       #   svg: "ri:cup-line"
-      - href: "https://github.com/xz131714"
+      - href: "https://github.com/7rain"
         ariaLabel: Github
         title: Github
         svg: "ri:github-line"
-      - href: "https://space.bilibili.com/1536411565"
+      - href: "https://space.bilibili.com/1246438445"
         ariaLabel: BiliBili
         title: BiliBili
         svg: "ri:bilibili-line"
-      - href: "https://x.com/xzz_ya"
-        ariaLabel: X(twitter)
-        title: X(twitter)
-        svg: "ri:twitter-line"
-      - href: "https://t.me/xzz_ya"
-        ariaLabel: Telegram
-        title: Telegram
-        svg: "ri:telegram-line"
 
 # 评论系统配置
 comments:
-  enable: true # 是否启用评论
-  type: giscus # giscus/waline/none
+  enable: true
+  type: giscus
   giscus:
-    repo: "xz131714/gsc"
-    repoId: "R_kgDOPTM-mA"
+    repo: "7baiyu/comments"
+    repoId: "R_kgDOP9yXbA"
     category: "General"
-    categoryId: "DIC_kwDOPTM-mM4CtcFq"
+    categoryId: "DIC_kwDOP9yXbM4CwWXe"
     mapping: "pathname"
+    strict: "0"
     lang: "zh-CN"
-    inputPosition: "top"
+    inputPosition: "bottom"
     reactionsEnabled: "1"
     emitMetadata: "0"
     loading: "lazy"
@@ -204,7 +189,7 @@ comments:
     pageview: false
 # Umami 统计配置
 umami:
-  enable: true
+  enable: false
   baseUrl: "https://um.131714.xyz"
   shareId: "a3FQfFJqDvjTVbVh"
   websiteId: "42d2e65e-b7b5-4cf0-b73d-9058a90ee2eb"
