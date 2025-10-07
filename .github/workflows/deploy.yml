@@ -1,31 +1,33 @@
-name: Deploy to GitHub Pages
+name: Deploy Astro site to GitHub Pages
 
 on:
   push:
-    branches: [ main ]  # 监听 main 分支的推送
+    branches:
+      - main  # 或者你的分支名
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4  # 拉取代码
+      - name: Checkout
+        uses: actions/checkout@v4
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20  # 匹配项目所需 Node 版本
-
-      - name: Install pnpm
-        run: npm install -g pnpm  # 安装 pnpm
+          node-version: 20
+          cache: 'pnpm'
 
       - name: Install dependencies
-        run: pnpm install  # 安装项目依赖
+        run: |
+          corepack enable
+          pnpm install
 
       - name: Build
-        run: pnpm run build  # 执行构建
+        run: pnpm run build
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4  # 部署到 gh-pages 分支
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}  # 自动生成的 Token
-          publish_dir: ./dist  # 构建产物目录
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
