@@ -190,7 +190,14 @@ comments:
 # Umami 统计配置
 umami:
   enable: false
-  baseUrl: "https://um.131714.xyz"
-  shareId: "a3FQfFJqDvjTVbVh"
-  websiteId: "42d2e65e-b7b5-4cf0-b73d-9058a90ee2eb"
+  baseUrl: ""
+  websiteId: ""
+  shareId: ""
   timezone: "Asia/Shanghai"
+
+# umami:
+#   enable: true
+#   baseUrl: "https://cloud.umami.is"
+#   websiteId: "9ecc75fe-0361-48f2-8b25-b5918e9b2e51"
+#   shareId: ""
+#   timezone: "Asia/Shanghai"
