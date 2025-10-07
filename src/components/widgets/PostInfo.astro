@@ -5,8 +5,9 @@ import type { PostData } from "@interfaces/data";
 
 const { pubDate, badge, word, time, url } = Astro.props as PostData & { url?: string };
 
-// 提取 slug 作为页面唯一标识
-const slug = url ? url.split("/").filter(Boolean).pop() : undefined;
+// 计算：这个 PostInfo 对应的文章 URL，是否就是当前正在浏览的页面
+const postPath = url ? new URL(url, Astro.url).pathname : "";
+const isCurrentPage = postPath && (postPath === Astro.url.pathname);
 ---
 
 <div class="flex flex-col sm:flex-row sm:justify-between gap-y-2 mb-4 text-xs sm:text-sm opacity-75">
@@ -14,13 +15,13 @@ const slug = url ? url.split("/").filter(Boolean).pop() : undefined;
     {pubDate && (
       <span class="flex items-center gap-1">
         <Icon name="lucide:calendar" class="h-4 w-4 flex-shrink-0" />
-        <span>{pubDate}</span>
+        <span class="truncate">{pubDate}</span>
       </span>
     )}
     {badge && (
-      <span class="flex items-center gap-1">
+      <span class="flex flex-wrap items-center gap-1">
         <Icon name="lucide:bookmark" class="h-4 w-4 flex-shrink-0" />
-        <span>{badge}</span>
+        <span class="truncate">{badge}</span>
       </span>
     )}
   </div>
@@ -28,54 +29,17 @@ const slug = url ? url.split("/").filter(Boolean).pop() : undefined;
   <div class="flex flex-wrap items-center gap-x-4 gap-y-2">
     <div class="flex items-center gap-1">
       <Icon name="lucide:book-open" class="h-4 w-4 flex-shrink-0" />
-      <span>{word} {t("label.wordCount")} · {time} {t("label.readTime")}</span>
+      <span class="truncate">{word} {t("label.wordCount")} · {time} {t("label.readTime")}</span>
     </div>
 
-    {slug && (
+    {/* ✅ 仅在“文章详情页”显示 Busuanzi 的 page_pv；列表页不展示，避免一直‘加载中…’ */}
+    {isCurrentPage && (
       <div class="flex items-center gap-1">
         <Icon name="lucide:eye" class="h-4 w-4 flex-shrink-0" />
-        <span id={`busuanzi_value_page_pv_${slug}`}>加载中...</span>
+        <span class="truncate">
+          <span id="busuanzi_value_page_pv">加载中...</span> 次阅读
+        </span>
       </div>
     )}
   </div>
 </div>
-
-{slug && (
-  <script is:inline>
-    function initBusuanzi() {
-      const scriptId = 'busuanzi_script';
-      if (!document.getElementById(scriptId)) {
-        const s = document.createElement('script');
-        s.id = scriptId;
-        s.async = true;
-        s.src = 'https://busuanzi.icodeq.com/busuanzi/2.3/busuanzi.pure.mini.js';
-        s.onload = updateBusuanziValue;
-        s.onerror = () => {
-          // 备用源
-          const backup = document.createElement('script');
-          backup.src = 'https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js';
-          backup.onload = updateBusuanziValue;
-          document.body.appendChild(backup);
-        };
-        document.body.appendChild(s);
-      } else {
-        updateBusuanziValue();
-      }
-    }
-
-    function updateBusuanziValue() {
-      const globalValue = document.getElementById('busuanzi_value_site_pv');
-      const localEl = document.getElementById('busuanzi_value_page_pv_' + {slug});
-      if (!localEl) return;
-
-      if (globalValue && globalValue.innerText !== '加载中...') {
-        localEl.innerText = globalValue.innerText;
-      } else {
-        localEl.innerText = '统计中...';
-      }
-    }
-
-    document.addEventListener('DOMContentLoaded', initBusuanzi);
-    document.addEventListener('astro:page-load', initBusuanzi);
-  </script>
-)}
