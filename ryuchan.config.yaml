@@ -14,15 +14,15 @@ site:
     pageSize: 8 # 每页显示的文章数量
   banner:  
     images:  
-      - "https://s2.loli.net/2025/01/25/PBvHFjr5yDu6t4a.webp"  
-      - "https://s2.loli.net/2025/01/25/6bKcwHZigzlM4mJ.webp"  
-      - "https://s2.loli.net/2025/01/25/H9WgEK6qNTcpFiS.webp"  
-      - "https://s2.loli.net/2025/01/25/njNVtuUMzxs81RI.webp"  
-      - "https://s2.loli.net/2025/01/25/tozsJ8QHAjFN3Mm.webp"  
-      - "https://s2.loli.net/2025/01/25/Pm89OveZq7NWUxF.webp"  
-      - "https://s2.loli.net/2025/01/25/UCYKvc1ZhgPHB9m.webp"  
-      - "https://s2.loli.net/2025/01/25/JjpLOW8VSmufzlA.webp"  
-    height: "60vh"
+      - "https://s3.bmp.ovh/imgs/2023/06/09/db2da955cdd12c5e.jpg"  
+      # - "https://s2.loli.net/2025/01/25/6bKcwHZigzlM4mJ.webp"  
+      # - "https://s2.loli.net/2025/01/25/H9WgEK6qNTcpFiS.webp"  
+      # - "https://s2.loli.net/2025/01/25/njNVtuUMzxs81RI.webp"  
+      # - "https://s2.loli.net/2025/01/25/tozsJ8QHAjFN3Mm.webp"  
+      # - "https://s2.loli.net/2025/01/25/Pm89OveZq7NWUxF.webp"  
+      # - "https://s2.loli.net/2025/01/25/UCYKvc1ZhgPHB9m.webp"  
+      # - "https://s2.loli.net/2025/01/25/JjpLOW8VSmufzlA.webp"  
+    height: "120vh"
   # Banner 页面标题配置
   pages:
     home:  
@@ -96,16 +96,16 @@ site:
         #   svg: "material-symbols:deployed-code-outline"
         #   target: _self
         # 子菜单项配置
-    - id: anime  
-      text: 追番  
-      href: /anime  
-      svg: "material-symbols:movie-outline"  
-      target: _self 
-    - id: project
-      text: 项目
-      href: /project
-      svg: "material-symbols:code-blocks-outline"
-      target: _self
+    # - id: anime  
+    #   text: 追番  
+    #   href: /anime  
+    #   svg: "material-symbols:movie-outline"  
+    #   target: _self 
+    # - id: project
+    #   text: 项目
+    #   href: /project
+    #   svg: "material-symbols:code-blocks-outline"
+    #   target: _self
     - id: friend
       text: 友人帐
       href: /friend

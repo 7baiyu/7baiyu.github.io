@@ -9,158 +9,78 @@ import { Icon } from "astro-icon/components";
 <BaseLayout title="导航">            
   <MainCard infoIcon="lucide:compass">      
     <div class="space-y-10">      
-      <!-- 开发工具 -->      
+      <!-- 渗透工具 -->      
       <section>      
         <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">      
           <Icon name="lucide:code" class="w-6 h-6 text-primary" />      
-          <span>开发工具</span>      
-        </h2>      
-                
+          <span>渗透工具</span>      
+        </h2>
+
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">      
           <NavigationCard      
-            name="Umami"      
-            avatar="https://img.xiaozhangya.xin/file/Logo/1753850918996_umami.png"      
-            description="网站访问统计分析平台"      
-            url="https://us.umami.is/dashboard"      
-            category="统计分析"  
+            name="DNSlog"      
+            avatar="http://www.dnslog.cn/banner.png"      
+            description="用于渗透测试数据回显问题"      
+            url="http://www.dnslog.cn/"      
+            category="数据回显"  
             id="DEV001"  
-          />      
-                  
+          />    
+  
           <NavigationCard      
-            name="Vercel"      
-            avatar="https://img.xiaozhangya.xin/file/Logo/1753851435981_Vercel.png"      
-            description="现代化的前端部署平台"      
-            url="https://vercel.com/login?next=%2Fxz131714s-projects"      
-            category="部署托管"  
+            name="棱角社区"      
+            avatar="https://forum.ywhack.com/images/default/logo.svg"      
+            description="多种测试工具合集"      
+            url="https://forum.ywhack.com/"      
+            category="工具合集"  
             id="DEV002"  
           />      
-                  
-          <NavigationCard      
-            name="Iconify"      
-            avatar="https://iconify.design/favicon.ico"      
-            description="海量图标库和图标搜索工具"      
-            url="https://iconify.design/"      
-            category="图标设计"  
-            id="DEV003"  
-          />   
-          
-          <NavigationCard      
-            name="Iconfont"      
-            avatar= "https://img.xiaozhangya.xin/file/Logo/DEPF9Ovv.png"    
-            description="阿里巴巴图标库"      
-            url="https://www.iconfont.cn/"    
-            category="图标设计"  
-            id="DEV004"  
-          /> 
-    
-          <NavigationCard      
-            name="Shields"      
-            avatar="https://shields.io/img/logo.png"      
-            description="为项目生成各种徽章"      
-            url="https://shields.io/"      
-            category="徽章工具"  
-            id="DEV005"  
-          />  
-          
-          <NavigationCard      
-            name="Clarity"      
-            avatar="https://picbed.xiaozhangya.xin/picbed/20250726225237829.png"      
-            description="微软的用户行为分析工具"      
-            url="https://clarity.microsoft.com/"      
-            category="用户分析"  
-            id="DEV005"  
-          />
         </div>      
       </section>    
     
-      <!-- 服务平台 -->    
+      <!-- 安全社区 -->    
       <section>    
         <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">    
           <Icon name="lucide:server" class="w-6 h-6 text-primary" />    
-          <span>服务平台</span>    
+          <span>安全社区</span>    
         </h2>    
             
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">    
           <NavigationCard    
-            name="DigitalPlat"    
-            avatar="https://picbed.xiaozhangya.xin/picbed/20250726172053106.png"    
-            description="免费域名注册"    
-            url="https://dash.domain.digitalplat.org/panel/main"    
-            category="域名管理"  
+            name="吾爱破解"    
+            avatar="https://avatar.52pojie.cn/images/noavatar_small.gif"    
+            description="包含多种多样的问题讨论和资源共享"    
+            url="https://www.52pojie.cn/"    
+            category="社区论坛"  
             id="SRV001"  
           />
 
           <NavigationCard    
-            name="Cloudflare"    
-            avatar="https://www.cloudflare.com/favicon.ico"    
-            description="全球领先的CDN和安全服务"    
-            url="https://dash.cloudflare.com/login"    
-            category="域名托管服务"  
+            name="看雪"    
+            avatar="https://bbs.kanxue.com/plugin/kanxue/img/kanxuelogo.png"    
+            description="包括多种安全问题的讨论"    
+            url="https://bbs.kanxue.com/"    
+            category="安全论坛"  
             id="SRV002"
           />
 
           <NavigationCard    
-            name="EdgeOne"
-            avatar="https://img.xiaozhangya.xin/file/Logo/cRfyZZ2A.png"
-            description="国内CDN和边缘计算服务"
-            url="https://console.edgeone.cn/login"
-            category="CDN服务"
+            name="freebuf"
+            avatar="https://www.freebuf.com/images/logoMax.png"
+            description="分析一些安全实战问题"
+            url="https://www.freebuf.com/"
+            category="经验分享"
             id="SRV003"    
           />
 
           <NavigationCard    
-            name="Spaceship"    
-            avatar="https://img.xiaozhangya.xin/file/Logo/1753850924810_Spaceship.png"    
-            description="A domain odyssey"  
-            url="https://www.spaceship.com/"
-            category="域名售卖"  
+            name="小迪渗透吧"    
+            avatar="http://www.xiaodi8.com/zb_users/upload/2019/12/201912151576406008190696.png"    
+            description="小迪个人博客资源与经验分享"  
+            url="http://www.xiaodi8.com/"
+            category="小迪渗透"  
             id="SRV004"           
            />
 
-          <NavigationCard    
-            name="Waline"    
-            avatar="https://waline.js.org/favicon.ico"    
-            description="简洁、安全的评论系统"    
-            url="https://waline.js.org/"    
-            category="评论服务"  
-            id="SRV005"  
-          />
-          
-          <NavigationCard    
-            name="Giscus"    
-            avatar="https://avatars.githubusercontent.com/ml/9968?s=82&v=4"    
-            description="GitHub Discussions 评论系统"  
-            url="https://giscus.app/zh-CN"
-            category="评论服务"  
-            id="SRV006"           
-           /> 
-           <NavigationCard    
-            name="Akismet"    
-            avatar="https://img.xiaozhangya.xin/file/Logo/opkjgCvb.svg"    
-            description="保持评论区干净整洁的小助手"  
-            url="https://akismet.com/"  
-            category="评论服务"  
-            id="SRV007"    
-          />
-
-
-          <NavigationCard    
-            name="GitHub"    
-            avatar="https://github.githubassets.com/favicons/favicon.svg"    
-            description="全球最大的开源社区"    
-            url="https://github.com"    
-            category="代码托管"   
-            id="SRV008"
-          />
-
-          <NavigationCard    
-            name="InfinityFree"    
-            avatar="https://img.xiaozhangya.xin/file/Logo/1754280946361_InfinityFree.png"    
-            description="免费托管WordPress和其他网站"    
-            url="https://www.infinityfree.com"    
-            category="免费主机"  
-            id="SRV009"
-          />
         </div>    
       </section>    
     
