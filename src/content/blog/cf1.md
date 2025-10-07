@@ -1,8 +1,12 @@
 ---
-title: "初识C语言（四）"
+title: "C语言符号优先级"
+description: "本文记录了C语言符号优先级"
 pubDate: "2023-10-31"
-description: "本文记录了C语言入门基础内容"
-tags: ["笔记"]
+categories:
+  - 笔记
+tags:
+  - C语言
+badge: 笔记
 ---
 
 # 符号优先级
