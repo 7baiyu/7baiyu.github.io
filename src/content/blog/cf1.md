@@ -2,6 +2,7 @@
 title: "C语言符号优先级"
 description: "本文记录了C语言符号优先级"
 pubDate: "2023-10-31"
+image: https://s3.bmp.ovh/imgs/2024/10/23/139dc3c6c0804825.png
 categories:
   - 笔记
 tags:

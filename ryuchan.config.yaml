@@ -152,11 +152,11 @@ user:
       #   ariaLabel: Support my work # 图标的可访问性标签
       #   title: Support my work # 图标的悬浮标题
       #   svg: "ri:cup-line"
-      - href: "https://github.com/7rain"
+      - href: "https://github.com/xz131714"
         ariaLabel: Github
         title: Github
         svg: "ri:github-line"
-      - href: "https://space.bilibili.com/1246438445"
+      - href: "https://space.bilibili.com/1536411565"
         ariaLabel: BiliBili
         title: BiliBili
         svg: "ri:bilibili-line"
