@@ -112,6 +112,26 @@ const bannerSubtitle = pageConfig?.subtitle || "";
           });
       })();
     </script>
+
+    <!-- 不蒜子访问统计 -->
+    <script>
+      // 每次进入页面都加载一次 busuanzi
+      function loadBusuanzi() {
+        const old = document.querySelector('script[data-busuanzi]');
+        if (old) old.remove(); // 移除旧实例，防止重复加载
+
+        const script = document.createElement('script');
+        script.src = '//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js';
+        script.async = true;
+        script.setAttribute('data-busuanzi', '');
+        document.body.appendChild(script);
+      }
+
+      document.addEventListener('astro:page-load', loadBusuanzi);
+      loadBusuanzi(); // 首次进入也执行
+    </script>
+
+
   </head>
 
   <!-- 移除上边距，让Banner从顶部开始 -->
