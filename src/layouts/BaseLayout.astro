@@ -27,6 +27,7 @@ const {
   isPostPage = false,
 } = Astro.props;
 
+// 根据当前路径从配置中获取 Banner 内容
 const currentPath = Astro.url.pathname.replace("/", "") || "home";
 const pageConfig = SITE_PAGES?.[currentPath];
 const bannerTitle = pageConfig?.title || title || "";
@@ -37,9 +38,8 @@ const bannerSubtitle = pageConfig?.subtitle || "";
 <html
   lang={SITE_LANGUAGE}
   style="background-color: var(--custom-page-bg)"
-  data-theme={SITE_THEME.dark}
-  data-theme-type="dark"
-  class="dark"
+  data-theme={SITE_THEME.light}
+  data-theme-type="light"
 >
   <head>
     <ClientRouter />
@@ -52,6 +52,7 @@ const bannerSubtitle = pageConfig?.subtitle || "";
     />
     <title>{`${title} - ${SITE_TAB}`}</title>
 
+    <!-- Umami分析（自建） -->
     {
       umamiConfig.enable && (
         <script
@@ -82,30 +83,48 @@ const bannerSubtitle = pageConfig?.subtitle || "";
     <script define:vars={{ SITE_THEME }} is:inline>
       (function () {
         const storedTheme = localStorage.getItem("theme");
-        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        const prefersDark = window.matchMedia(
+          "(prefers-color-scheme: dark)",
+        ).matches;
         let theme;
-        if (storedTheme) theme = storedTheme;
-        else {
+        if (storedTheme) {
+          theme = storedTheme;
+        } else {
           theme = prefersDark ? SITE_THEME.dark : SITE_THEME.light;
           localStorage.setItem("theme", theme);
         }
         document.documentElement.setAttribute("data-theme", theme);
         const themeType = theme === SITE_THEME.dark ? "dark" : "light";
         document.documentElement.setAttribute("data-theme-type", themeType);
-        document.documentElement.classList.toggle("dark", themeType === "dark");
+        window
+          .matchMedia("(prefers-color-scheme: dark)")
+          .addEventListener("change", (e) => {
+            if (!localStorage.getItem("theme")) {
+              const newTheme = e.matches ? SITE_THEME.dark : SITE_THEME.light;
+              document.documentElement.setAttribute("data-theme", newTheme);
+              const newThemeType = e.matches ? "dark" : "light";
+              document.documentElement.setAttribute(
+                "data-theme-type",
+                newThemeType,
+              );
+              localStorage.setItem("theme", newTheme);
+            }
+          });
       })();
     </script>
   </head>
 
+  <!-- 移除上边距，让Banner从顶部开始 -->
   <body
-    class="flex flex-col min-h-screen bg-base-300 text-base-content transition-colors duration-500"
+    class="flex flex-col min-h-screen"
     {...isIndexed ? { "data-pagefind-body": true } : {}}
   >
     <Banner title={bannerTitle} subtitle={bannerSubtitle} />
     <Navbar />
-
     <div class="max-w-blog mx-auto w-full flex-grow">
-      <div class="grid grid-cols-1 md:grid-cols-5 lg:grid-cols-4 gap-4 px-4 pb-4 h-full">
+      <div
+        class="grid grid-cols-1 md:grid-cols-5 lg:grid-cols-4 gap-4 px-4 pb-4 h-full"
+      >
         <main
           class="col-span-1 md:col-span-4 lg:col-span-3 bg-transparent order-1 md:order-2 flex flex-col gap-4"
         >
@@ -121,10 +140,12 @@ const bannerSubtitle = pageConfig?.subtitle || "";
       </div>
     </div>
 
+
     <MobileTOC headings={headings} showTOC={showTOC} />
 
     <!-- 全局樱花飘落特效 -->
     <script is:inline>
+      // sakura.js - 浏览器全局樱花飘落特效
       (function () {
         function getRandom(option, config) {
           let ret, random;
@@ -133,14 +154,8 @@ const bannerSubtitle = pageConfig?.subtitle || "";
             case 'y': ret = Math.random() * window.innerHeight; break;
             case 's': ret = config.size.min + Math.random() * (config.size.max - config.size.min); break;
             case 'r': ret = Math.random() * 6; break;
-            case 'fnx':
-              random = config.speed.horizontal.min + Math.random() * (config.speed.horizontal.max - config.speed.horizontal.min);
-              ret = function (x, y) { return x + random; };
-              break;
-            case 'fny':
-              random = config.speed.vertical.min + Math.random() * (config.speed.vertical.max - config.speed.vertical.min);
-              ret = function (x, y) { return y + random; };
-              break;
+            case 'fnx': random = config.speed.horizontal.min + Math.random() * (config.speed.horizontal.max - config.speed.horizontal.min); ret = function (x, y) { return x + random; }; break;
+            case 'fny': random = config.speed.vertical.min + Math.random() * (config.speed.vertical.max - config.speed.vertical.min); ret = function (x, y) { return y + random; }; break;
             case 'fnr': ret = function (r) { return r + config.speed.rotation; }; break;
           }
           return ret;
@@ -232,11 +247,13 @@ const bannerSubtitle = pageConfig?.subtitle || "";
             this.canvas.height = window.innerHeight;
           }
         };
+        // 全局初始化
         window.initSakura = function (config) {
           if (!window.__sakuraManager) {
             window.__sakuraManager = new SakuraManager(config);
             window.__sakuraManager.init();
           } else {
+            // 移除旧canvas
             var oldCanvas = document.getElementById('canvas_sakura');
             if (oldCanvas) oldCanvas.remove();
             window.__sakuraManager = new SakuraManager(config);
@@ -261,62 +278,43 @@ const bannerSubtitle = pageConfig?.subtitle || "";
       }
       runSakura();
       window.addEventListener('resize', runSakura);
-      document.addEventListener('astro:after-swap', runSakura);
+      document.addEventListener('astro:after-swap', () => {
+        runSakura();
+      });
     </script>
 
-    <!-- 不蒜子：首屏加载 + Astro 路由切换后刷新 -->
-    <script is:inline>
-      (function () {
-        function ensureBusuanzi() {
-          try {
-            if (window.BUSUANZI && typeof window.BUSUANZI.fetch === 'function') {
-              // 已加载：直接刷新统计（解决“加载中...”不更新）
-              window.BUSUANZI.fetch();
-              return;
-            }
-            // 未加载：只注入一次脚本
-            if (!document.getElementById('busuanzi_script')) {
-              const s = document.createElement('script');
-              s.id = 'busuanzi_script';
-              s.async = true;
-              s.src = 'https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js';
-              document.body.appendChild(s);
-            }
-          } catch (e) {
-            console.error('[Busuanzi] init error:', e);
-          }
+    <!-- 其余脚本保持不变 -->
+    <script define:vars={{ SITE_THEME }} is:inline>
+      document.addEventListener("astro:after-swap", () => {
+        const storedTheme = localStorage.getItem("theme");
+        if (storedTheme) {
+          document.documentElement.setAttribute("data-theme", storedTheme);
+          const themeType = storedTheme === SITE_THEME.dark ? "dark" : "light";
+          document.documentElement.setAttribute("data-theme-type", themeType);
         }
-
-        // 首次进入
-        if (document.readyState === 'loading') {
-          document.addEventListener('DOMContentLoaded', ensureBusuanzi);
-        } else {
-          ensureBusuanzi();
-        }
-
-        // Astro 页面切换后也刷新
-        document.addEventListener('astro:page-load', ensureBusuanzi);
-        document.addEventListener('astro:after-swap', ensureBusuanzi);
-      })();
+      });
     </script>
 
-    <!-- 复制代码提示 -->
     <script is:inline>
       document.addEventListener("astro:page-load", () => {
         document.querySelectorAll(".btn-copy").forEach((button) => {
           button.addEventListener("click", async () => {
             const codeBlock = button.closest(".ryuchan-code");
-            const code = codeBlock.querySelector("code")?.textContent ?? "";
-            const copyIcon = button.querySelector(".ryuchan-code-toolbar-copy-icon");
-            const successIcon = button.querySelector(".ryuchan-code-toolbar-copy-success");
+            const code = codeBlock.querySelector("code").textContent;
+            const copyIcon = button.querySelector(
+              ".ryuchan-code-toolbar-copy-icon",
+            );
+            const successIcon = button.querySelector(
+              ".ryuchan-code-toolbar-copy-success",
+            );
             try {
               await navigator.clipboard.writeText(code);
-              copyIcon?.classList.add("hidden");
-              successIcon?.classList.remove("hidden");
+              copyIcon.classList.add("hidden");
+              successIcon.classList.remove("hidden");
               button.classList.add("copy-success");
               setTimeout(() => {
-                copyIcon?.classList.remove("hidden");
-                successIcon?.classList.add("hidden");
+                copyIcon.classList.remove("hidden");
+                successIcon.classList.add("hidden");
                 button.classList.remove("copy-success");
               }, 2000);
             } catch (err) {
@@ -328,14 +326,30 @@ const bannerSubtitle = pageConfig?.subtitle || "";
     </script>
 
     <style is:inline>
-      .btn-copy { position: relative; overflow: hidden; }
-      .copy-success { animation: pulse 0.5s ease-in-out; }
-      .ryuchan-code-toolbar-copy-success svg { color: #10b981; }
+      .btn-copy {
+        position: relative;
+        overflow: hidden;
+      }
+      .copy-success {
+        animation: pulse 0.5s ease-in-out;
+      }
+  .ryuchan-code-toolbar-copy-success svg {
+        color: #10b981;
+      }
       @keyframes pulse {
-        0% { transform: scale(1); }
-        50% { transform: scale(1.1); }
-        100% { transform: scale(1); }
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.1);
+        }
+        100% {
+          transform: scale(1);
+        }
       }
     </style>
+
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
   </body>
 </html>
