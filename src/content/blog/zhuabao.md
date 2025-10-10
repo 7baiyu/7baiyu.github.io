@@ -6,7 +6,7 @@ image: https://cdn2.zzzmh.cn/wallpaper/origin/dd4aee16880411ebb6edd017c2d2eca2.j
 categories:
   - 实践
 tags:
-  - Linux
+  - Burpsuite, Charles, Proxifier
 badge: 实践
 ---
 
@@ -50,7 +50,9 @@ https://www.proxifier.com/download/
 
 #### 2.2Burpsuite
 
-浏览器打开链接https://burp，点击下载安装证书，安装证书要放在受信任的根证书颁发机构目录下。
+浏览器打开链接https://burp
+
+点击下载安装证书，安装证书要放在受信任的根证书颁发机构目录下。
 
 
 
